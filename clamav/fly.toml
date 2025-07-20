@@ -5,13 +5,6 @@ primary_region = "iad" # Usa la región donde desplegaste tu aplicación ClamAV
 [build]
   dockerfile = "Dockerfile"
 
-# Configuración para el volumen persistente.
-# Asegúrate de haber creado este volumen con:
-# flyctl volumes create clamav_data --region iad --size 10
-[mounts]
-  source="clamav_data" # Nombre del volumen persistente que creaste
-  destination="/var/lib/clamav" # Ruta dentro del contenedor donde ClamAV guarda las firmas
-
 [http_service]
   internal_port = 3310 # Puerto interno que ClamAV expone
   force_https = false # No necesitamos HTTPS para un servicio interno
