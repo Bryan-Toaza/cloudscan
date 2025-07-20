@@ -1,3 +1,5 @@
+version: '3.8' # Añadir la versión explícita de Docker Compose
+
 services:
   backend:
     build: ./backend
