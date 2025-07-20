@@ -1,20 +1,16 @@
-# fly.toml app configuration file generated for clamav-black-resonance-1066 on 2025-07-20T15:37:09-05:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'clamav-black-resonance-1066'
-primary_region = "iad" # Elige la región más cercana a ti o a tus usuarios (ej. iad para Virginia)
+# fly.toml para el servicio clamav
+app = "clamav-black-resonance-1066" # Asegúrate de que este sea el nombre exacto de tu aplicación ClamAV en Fly.io
+primary_region = "iad" # Usa la región donde desplegaste tu aplicación ClamAV
 
 [build]
   dockerfile = "Dockerfile"
 
-# Configuración opcional para un volumen persistente para las firmas de ClamAV
-# Si usas esto, debes crear el volumen una vez con:
-# flyctl volumes create clamav_data --region <tu-region> --size 10
+# Configuración para el volumen persistente.
+# Asegúrate de haber creado este volumen con:
+# flyctl volumes create clamav_data --region iad --size 10
 [mounts]
-  source="clamav_data" # Nombre del volumen persistente
-  destination="/var/lib/clamav" # Ruta donde ClamAV guarda las firmas
+  source="clamav_data" # Nombre del volumen persistente que creaste
+  destination="/var/lib/clamav" # Ruta dentro del contenedor donde ClamAV guarda las firmas
 
 [http_service]
   internal_port = 3310 # Puerto interno que ClamAV expone
@@ -23,8 +19,3 @@ primary_region = "iad" # Elige la región más cercana a ti o a tus usuarios (ej
   auto_start_machines = true # Permite que la máquina se inicie con el tráfico
   min_machines_running = 0 # Permite escalar a cero si no hay uso
   processes = ["app"]
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory = "2048mb" # <--- ¡CAMBIO CLAVE! Aumentado a 2GB
