@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const historyListDiv = document.getElementById("historyList");
   const refreshHistoryBtn = document.getElementById("refreshHistory");
 
-  const API_BASE_URL = "https://backend-icy-resonance-4475.fly.dev"; // Asegúrate de que coincida con tu backend
+  const API_BASE_URL = "https://backend-icy-resonance-4475.fly.dev/"; // Asegúrate de que coincida con tu backend
 
   // Función para mostrar mensajes de error/éxito
   function showMessage(message, type = "info") {
