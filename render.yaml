@@ -24,8 +24,12 @@ services:
       - 3310 # Puerto que expone ClamAV
 
   # Servicio Frontend (Nginx sirviendo HTML/JS/CSS)
-  - type: static # Tipo de servicio: Static Site (Render sirve archivos estáticos directamente)
+  - type: web # Tipo de servicio: Web Service (accesible desde internet)
     name: cloudscan-frontend # Nombre del servicio en Render
-    rootDir: frontend # Directorio raíz donde están tus archivos estáticos (index.html, app.js, style.css)
-    # publishDirectory: / # Opcional: si tus archivos estáticos están en un subdirectorio dentro de 'frontend/', especifica aquí (ej. si estuvieran en 'frontend/public', sería 'public')
-    # Render automáticamente servirá los archivos desde el rootDir especificado.
+    env: docker # Entorno de ejecución: Docker (construye desde Dockerfile)
+    rootDir: frontend # Directorio raíz donde está el Dockerfile para el frontend
+    buildCommand: "" # El Dockerfile se encarga de la construcción
+    startCommand: nginx -g 'daemon off;' # Comando para iniciar Nginx en primer plano
+    ports:
+      - 80 # Puerto que expone el frontend
+    healthCheckPath: / # Ruta para la verificación de salud
