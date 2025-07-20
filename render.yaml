@@ -31,4 +31,4 @@ services:
     startCommand: nginx -g 'daemon off;' # Comando para iniciar Nginx en primer plano
     ports:
       - 80 # Puerto que expone el frontend
-    healthCheckPath: / # Ruta para la verificación de salud
+    healthCheckPath: / # Ruta para la verificación de saludh
