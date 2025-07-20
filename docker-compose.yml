@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: ./backend
+    container_name: cloudscan-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Monta el directorio local 'db_data' al '/app' dentro del contenedor
+      # Esto permite que cloudscan.db se persista fuera del contenedor
+      - ./backend:/app
+      - db_data:/app/db_data # Volumen para persistir la base de datos SQLite
+    depends_on:
+      - clamav
+
+  clamav:
+    build: ./clamav
+    container_name: cloudscan-clamav
+    ports:
+      - "3310:3310"
+
+  frontend:
+    image: nginx:alpine
+    container_name: cloudscan-frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+
+# Define el volumen para la base de datos
+volumes:
+  db_data:

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CloudScan Local</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>CloudScan Local</h1>
+
+    <!-- Formulario para escanear archivos -->
+    <div class="scan-section">
+      <h2>Escanear Archivo</h2>
+      <form id="scanFormFile">
+        <input type="file" id="fileInput" required />
+        <button type="submit">Escanear archivo</button>
+      </form>
+    </div>
+
+    <!-- Formulario para escanear URLs -->
+    <div class="scan-section">
+      <h2>Escanear URL</h2>
+      <form id="scanFormUrl">
+        <input type="text" id="urlInput" placeholder="Introduce una URL (ej. https://ejemplo.com)" required />
+        <button type="submit">Escanear URL</button>
+      </form>
+    </div>
+
+    <!-- Área para mostrar resultados -->
+    <div id="result" class="hidden result-box"></div>
+
+    <!-- Sección de historial de escaneos -->
+    <div class="history-section">
+      <h2>Historial de Escaneos</h2>
+      <button id="refreshHistory">Actualizar Historial</button>
+      <div id="historyList" class="history-list">
+        <!-- El historial se cargará aquí -->
+        <p class="loading-message">Cargando historial...</p>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

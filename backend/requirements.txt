@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+filetype
+aiofiles
+pyclamd
+requests
+beautifulsoup4
+lxml
+python-whois
+dnspython
+SQLAlchemy
+pysqlite3
