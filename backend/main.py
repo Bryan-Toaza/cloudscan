@@ -21,7 +21,7 @@ app = FastAPI()
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Ajusta según tu frontend en producción
+    allow_origins=["https://frontend-still-silence-8151.fly.dev/"],  # Ajusta según tu frontend en producción
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

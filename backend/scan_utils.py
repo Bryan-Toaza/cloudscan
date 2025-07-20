@@ -14,7 +14,7 @@ import json # Importar para manejar la serialización de Whois info
 logger = logging.getLogger(__name__)
 
 # Configuración de ClamAV
-CLAMAV_HOST = 'clamav'
+CLAMAV_HOST = 'clamav-black-resonance-1066.internal'
 CLAMAV_PORT = 3310
 MAX_CLAMAV_RETRIES = 5 # Número máximo de reintentos
 RETRY_DELAY_SECONDS = 2 # Retraso entre reintentos en segundos
