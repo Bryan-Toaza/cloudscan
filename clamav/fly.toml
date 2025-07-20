@@ -14,6 +14,6 @@ primary_region = "iad" # Usa la región donde desplegaste tu aplicación ClamAV
   processes = ["app"]
 
 [[vm]]
-  memory = '1024mb'
-  cpu_kind = 'shared'
+  cpu_kind = "shared"
   cpus = 1
+  memory = "2048mb" # Memoria aumentada a 2GB para ClamAV
