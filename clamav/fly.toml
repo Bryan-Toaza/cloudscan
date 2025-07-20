@@ -4,19 +4,27 @@
 #
 
 app = 'clamav-black-resonance-1066'
-primary_region = 'iad'
+primary_region = "iad" # Elige la región más cercana a ti o a tus usuarios (ej. iad para Virginia)
 
 [build]
   dockerfile = "Dockerfile"
+
+# Configuración opcional para un volumen persistente para las firmas de ClamAV
+# Si usas esto, debes crear el volumen una vez con:
+# flyctl volumes create clamav_data --region <tu-region> --size 10
+[mounts]
+  source="clamav_data" # Nombre del volumen persistente
+  destination="/var/lib/clamav" # Ruta donde ClamAV guarda las firmas
+
 [http_service]
-  internal_port = 3310
-  force_https = false
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+  internal_port = 3310 # Puerto interno que ClamAV expone
+  force_https = false # No necesitamos HTTPS para un servicio interno
+  auto_stop_machines = true # Permite que la máquina se detenga si no hay tráfico
+  auto_start_machines = true # Permite que la máquina se inicie con el tráfico
+  min_machines_running = 0 # Permite escalar a cero si no hay uso
+  processes = ["app"]
 
 [[vm]]
-  memory = '1024mb'
-  cpu_kind = 'shared'
+  cpu_kind = "shared"
   cpus = 1
+  memory = "2048mb" # <--- ¡CAMBIO CLAVE! Aumentado a 2GB
