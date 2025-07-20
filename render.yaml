@@ -12,13 +12,9 @@ services:
     healthCheckPath: / # Ruta para la verificación de salud
     ports:
       - 8000 # Puerto que expone el servicio
-    # Relación de dependencia con ClamAV
-    # Render Blueprint maneja las dependencias automáticamente si los servicios están en el mismo blueprint
-    # Las variables de entorno para la conexión a ClamAV (CLAMAV_HOST) se resuelven automáticamente
-    # usando el nombre del servicio 'cloudscan-clamav' dentro de la red de Render.
 
   # Servicio ClamAV (Antivirus)
-  - type: private # Tipo de servicio: Private Service (solo accesible por otros servicios en Render)
+  - type: worker # Tipo de servicio: Worker (corre en segundo plano, accesible internamente)
     name: cloudscan-clamav # Nombre del servicio en Render
     env: docker # Entorno de ejecución: Docker (construye desde Dockerfile)
     rootDir: clamav # Directorio raíz del Dockerfile para ClamAV
@@ -32,33 +28,8 @@ services:
     name: cloudscan-frontend # Nombre del servicio en Render
     env: docker # Entorno de ejecución: Docker (usa la imagen nginx:alpine)
     rootDir: frontend # Directorio raíz del código para el frontend
-    # buildCommand: "" # No es necesario si usas una imagen base como nginx
+    # buildCommand: "" # No es necesario si usas la imagen nginx:alpine directamente y tienes un Dockerfile simple
     # startCommand: nginx -g 'daemon off;' # Este comando se ejecutará automáticamente si la imagen base lo tiene configurado
-    # Render puede servir archivos estáticos directamente si no hay un Dockerfile explícito
-    # Para Nginx, puedes usar un Dockerfile simple si es necesario, o Render puede detectarlo.
-    # Si Render no detecta automáticamente el Dockerfile de Nginx o no sirve los archivos estáticos,
-    # puedes crear un Dockerfile simple en 'frontend/' que copie los archivos y use nginx.
-    # Por ahora, asumimos que Render puede manejar la imagen nginx o que tienes un Dockerfile simple.
-    # Si tienes un Dockerfile en frontend/, Render lo usará. Si no, puedes configurar esto como un Static Site.
-    # Para simplicidad y siguiendo la estructura actual, lo definimos como Docker.
-    
-    # Si usas la imagen nginx directamente, Render puede requerir un Dockerfile simple en 'frontend/'
-    # o puedes cambiar el 'type' a 'static' si solo sirves archivos estáticos sin un servidor web en el contenedor.
-    # Para este setup, lo mantenemos como 'web' con 'env: docker' asumiendo un Dockerfile simple o detección.
-    # Si Render te da problemas, cambia el tipo a 'static' y configura el 'publishDirectory' a '/' o donde estén tus archivos.
-    
-    # Si tienes un Dockerfile en frontend/, Render lo usará. Si no, considera:
-    # type: static
-    # publishDirectory: / # O el subdirectorio donde están tus archivos HTML/JS/CSS
-    
-    # Para mantener la coherencia con docker-compose.yml y la imagen nginx:alpine
-    # Render intentará construir desde el Dockerfile en 'frontend/' si existe,
-    # o usará la imagen si especificas 'image' en lugar de 'rootDir' y 'env: docker'.
-    # Dado que estamos usando 'rootDir' y 'env: docker', Render buscará un Dockerfile en 'frontend/'.
-    # Si no tienes un Dockerfile en 'frontend/', Render fallará.
-    # Por lo tanto, si no tienes un Dockerfile en 'frontend/', deberías cambiar el 'type' a 'static'.
-    
-    # Asumiendo que tienes un Dockerfile simple en frontend/ o Render lo maneja:
     ports:
       - 80 # Puerto que expone el frontend
     healthCheckPath: / # Ruta para la verificación de salud
