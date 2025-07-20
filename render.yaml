@@ -1,6 +1,5 @@
-# render.yaml - Render Blueprint para el despliegue de CloudScan
+yaml: 1 # Explicitamente define la versión del Blueprint YAML
 
-# Define la versión de la especificación de Render Blueprint
 services:
   # Servicio Backend (API de FastAPI)
   - type: web # Tipo de servicio: Web Service (accesible desde internet)
