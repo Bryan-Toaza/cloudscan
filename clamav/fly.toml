@@ -19,3 +19,8 @@ primary_region = "iad" # Usa la región donde desplegaste tu aplicación ClamAV
   auto_start_machines = true # Permite que la máquina se inicie con el tráfico
   min_machines_running = 0 # Permite escalar a cero si no hay uso
   processes = ["app"]
+
+[[vm]]
+  memory = '1024mb'
+  cpu_kind = 'shared'
+  cpus = 1
