@@ -1,5 +1,6 @@
-yaml: 1 # Explicitamente define la versión del Blueprint YAML
+# render.yaml - Render Blueprint para el despliegue de CloudScan
 
+# Define la versión de la especificación de Render Blueprint
 services:
   # Servicio Backend (API de FastAPI)
   - type: web # Tipo de servicio: Web Service (accesible desde internet)
@@ -25,10 +26,10 @@ services:
   # Servicio Frontend (Nginx sirviendo HTML/JS/CSS)
   - type: web # Tipo de servicio: Web Service (accesible desde internet)
     name: cloudscan-frontend # Nombre del servicio en Render
-    env: docker # Entorno de ejecución: Docker (construye desde Dockerfile)
-    rootDir: frontend # Directorio raíz donde está el Dockerfile para el frontend
-    buildCommand: "" # El Dockerfile se encarga de la construcción
-    startCommand: nginx -g 'daemon off;' # Comando para iniciar Nginx en primer plano
+    env: docker # Entorno de ejecución: Docker (usa la imagen nginx:alpine)
+    rootDir: frontend # Directorio raíz del código para el frontend
+    # buildCommand: "" # No es necesario si usas la imagen nginx:alpine directamente y tienes un Dockerfile simple
+    # startCommand: nginx -g 'daemon off;' # Este comando se ejecutará automáticamente si la imagen base lo tiene configurado
     ports:
       - 80 # Puerto que expone el frontend
-    healthCheckPath: / # Ruta para la verificación de saludh
+    healthCheckPath: / # Ruta para la verificación de salud
