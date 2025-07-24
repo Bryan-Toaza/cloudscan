@@ -16,4 +16,4 @@ primary_region = "iad" # Usa la región donde desplegaste tu aplicación ClamAV
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
-  memory = "1026mb"
+  memory = "1024mb"
